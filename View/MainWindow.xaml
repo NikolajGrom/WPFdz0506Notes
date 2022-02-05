@@ -1,0 +1,63 @@
+﻿<Window x:Class="WPFdz0506.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFdz0506"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Заметки" Height="625" Width="800" WindowStartupLocation="CenterScreen" 
+        ResizeMode="NoResize" Icon="/View/Properties.ico">
+    
+    <Grid Background="#FFD700">
+        
+        <Border MinWidth="350" Margin="15,10,15,10" Background="White" VerticalAlignment="Center" 
+                Padding="10" MaxWidth="800" CornerRadius="10" Height="380">
+            
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="25" Color="Black" ShadowDepth="20"></DropShadowEffect>
+            </Border.Effect>
+            
+            <DataGrid x:Name="Notes" FontSize="16" FontWeight="Bold" Margin="1" 
+                      AutoGenerateColumns="False" 
+                      ItemsSource ="{Binding notesList}">
+                
+                <DataGrid.Columns >
+                    <DataGridTextColumn Binding="{Binding Path = CreatDateTime }" IsReadOnly="True" Header="Дата" Width="150"/>
+                    <DataGridCheckBoxColumn Binding="{Binding Path = isPerform}" IsReadOnly="False" Header="Выполнение" Width="180"/>
+                    <DataGridTextColumn Binding="{Binding Path = CategoryId}" IsReadOnly="False" Header="Категория" Width="150"/>
+                    <DataGridTextColumn Binding="{Binding Path = description}" IsReadOnly="False" Header=" Описание" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        
+        <Button materialDesign:ButtonProgressAssist.Value="-150"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                Style="{StaticResource MaterialDesignRaisedButton}" 
+                Content="Добавить" HorizontalAlignment="Left" 
+                Cursor="Hand" VerticalAlignment="Bottom" Margin="50,10,0,20" 
+                BorderThickness="5,1,5,1" Width="100" Command ="{Binding Path = AddCommand}" >
+        </Button>
+        
+        <Button HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+                Margin="0,0,0,20" Width="100" Content="Обновить" Cursor="Hand">
+        </Button>
+        
+        <Button materialDesign:ButtonProgressAssist.Value="-15"
+                materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                Margin="0,0,50,20" Width="110" Content="Удалить" 
+                Background="#FFF74940" BorderBrush="#FFF12319" 
+                Foreground="#DD141415" FontWeight="Bold" FontSize="18" Cursor="Hand">
+        </Button>
+        
+        <Label Content="ЗАМЕТКИ" HorizontalAlignment="Center" Margin="0,27,0,0" VerticalAlignment="Top"
+               Width="500" Height="36" RenderTransformOrigin="0.477,0.602" Background="#FFBFBDB5" 
+               HorizontalContentAlignment="Center" FontSize="20" FontWeight="Bold" FontStyle="Italic">
+        </Label>
+
+    </Grid>
+</Window>
